@@ -1,0 +1,47 @@
+.eachTicket{
+    font-size:20px;
+    line-height: 1.4;
+    list-style-type: none;
+    padding:5px;
+    margin: 20px 5px;
+    border-bottom: 1px solid #262626;
+    transition: .5s;
+    padding:15px;
+}
+
+.eachTicket:hover{
+    transform: rotate(-1deg);
+    border-bottom: 10px solid #262626;
+
+}
+
+.sp{
+    color:red;
+    margin-left: 20px;
+}
+
+.links{
+    cursor: pointer;
+    text-decoration: underline;
+    margin: 0 auto;
+}
+
+.edit{
+    cursor: pointer;
+    font-weight: bold;
+    float: left;
+    padding:5px 10px;
+    background-color: #262626;
+    color:white;
+    border-radius: 5px;
+}
+
+.delete{
+    cursor: pointer;
+    float:right;
+    font-weight: 700;
+    background-color: red;
+    padding:5px 10px;
+    color: white;
+    border-radius: 5px;
+}
