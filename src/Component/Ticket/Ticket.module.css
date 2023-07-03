@@ -45,3 +45,22 @@
     color: white;
     border-radius: 5px;
 }
+
+
+@media screen and (max-width: 480px) {
+    .eachTicket{
+        width: auto;
+        font-size:12px;
+    }
+
+    .links{
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .edit,
+    .delete{
+      
+        font-size: 10px;
+    }
+   }

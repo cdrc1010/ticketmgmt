@@ -37,3 +37,16 @@ select{
 select:focus{
     outline: none;
 }
+
+@media screen and (max-width: 480px) {
+    input,
+    select{
+        font-size:10px;
+        width: 100%;
+    }
+
+    .submit{
+        font-size:10px;
+        width:70%;
+    }
+}

@@ -1,7 +1,17 @@
 import Ticket from "./Ticket";
 import styles from './Tickets.module.css';
 import useGetTotalSp from "../../hooks/useGetTotal";
+import { useState } from "react";
 const Tickets = ({ data, onUpdate, onDelete }) => {
+
+
+    const [filterTicket, setFilterTicket] = useState(data);
+    const [selectedFilter, setSelectedFilter] = useState('');
+
+
+
+
+
 
     // const myAccountTotal = data.filter(el => el.epicName === 'Mini Chile My Account').reduce((acc, val) => {
     //     let currentSP = parseFloat(val.sp);
@@ -27,6 +37,22 @@ const Tickets = ({ data, onUpdate, onDelete }) => {
     //     let currentSP = parseFloat(val.sp);
     //     return acc + currentSP
     // }, 0);
+    const filterHandler = (e) => {
+        console.log(e.target.value);
+        let filteredEpic = e.target.value;
+        setSelectedFilter(filteredEpic);
+
+        const myFilteredTickets = data.reverse().filter(ticket => {
+            return ticket.epicName === filteredEpic
+        })
+
+        setFilterTicket(myFilteredTickets);
+    };
+
+    const clearHandler = () => {
+        setFilterTicket(data);
+        setSelectedFilter('');
+    };
 
     const myAccountTotal = useGetTotalSp(data, 'Mini Chile My Account');
     const basketTotal = useGetTotalSp(data, 'Mini Chile Digital Direct | Basket & Checkout');
@@ -46,9 +72,26 @@ const Tickets = ({ data, onUpdate, onDelete }) => {
                 <div className={styles.totalSpRow}>Mini CL  Digital Direct | Payment Gateway: <span className={styles.spValue}>{paymentGatewayTotal} SP</span></div>
                 <div className={styles.totalSpRow}>Mini CL  Sales Enablement: <span className={styles.spValue}>{salesEnablement} SP</span></div>
             </div>
+            <div className={styles.filterContainer}>
+                <div className={styles.filterLabel}>Filter:</div>
+                <div>
+                    <select defaultValue={selectedFilter} onChange={filterHandler} className={styles.filterSelection} value={selectedFilter}>
+                        <option value="" disabled>Choose Epic</option>
+                        <option value="Mini Chile My Account">Mini Chile My Account</option>
+                        <option value="Mini Chile Digital Direct | Basket & Checkout">Mini Chile Digital Direct | Basket & Checkout</option>
+                        <option value="Mini Chile Digital Direct | Finance Application">Mini Chile Digital Direct | Finance Application</option>
+                        <option value="Mini Chile Digital Direct | Stock">Mini Chile Digital Direct | Stock</option>
+                        <option value="Mini Chile|Payment Gateway">Mini Chile|Payment Gateway</option>
+                        <option value="Mini Chile Sales Enablement">Mini Chile Sales Enablement</option>
+                    </select>
+                </div>
+                <div>
+                    <button onClick={clearHandler} className={styles.btnClear}>Clear</button>
+                </div>
+            </div>
             <div className={styles.ticketContainer}>
                 <ul>
-                    {data.map((ticket) => (
+                    {filterTicket.map((ticket) => (
                         <Ticket className={styles.ticketItem} key={ticket.id} ticket={ticket.ticketNo} epic={ticket.epicName} sp={ticket.sp} id={ticket.id} onUpdate={onUpdate} onDelete={onDelete} />
                     ))}
                 </ul>
