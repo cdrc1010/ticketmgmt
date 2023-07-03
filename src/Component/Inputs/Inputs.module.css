@@ -39,7 +39,9 @@ select:focus{
 }
 
 @media screen and (max-width: 480px) {
-    input,
+    input[type='text']{
+        width:94%;
+    }
     select{
         font-size:10px;
         width: 100%;
